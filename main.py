@@ -1,21 +1,36 @@
 import openpyxl
 import random
-'''workbook = openpyxl.load_workbook('valami.xlsx')
-worksheet = workbook['Munka1']
+import os
 
-Datas = []
-data = {}
-for row in worksheet.iter_rows(min_row=2, values_only=True):
-    data = {}
-    data['Id'] = row[1]
-    data['Name'] = row[2]
-    data['Position'] = row[3]
-    data['Supervisor'] = row[4]
-    data['Start'] = str(row[5])
-    data['Benefits'] = row[6]
+file_name = 'valami.xlsx'
+file = os.path.isfile(file_name)
 
-    Datas.append(data)
-'''
+
+class OpenExcel():
+    def __init__(self):
+        workbook = openpyxl.load_workbook(file_name)
+        worksheet = workbook['Munka1']
+
+        self.Datas = []
+        data = {}
+        for row in worksheet.iter_rows(min_row=2, values_only=True):
+            data = {}
+            data['Id'] = row[1]
+            data['Name'] = row[2]
+            data['Position'] = row[3]
+            data['Supervisor'] = row[4]
+            data['Start'] = str(row[5])
+            data['Benefits'] = row[6]
+            self.Datas.append(data)
+    def Out(self):
+        for data in self.Datas:
+            print(f"Id : {data['Id']}, \t Name : {data['Name']}, \t Position : {data['Position']}, \t Supervisor : {data['Supervisor']}, \t Start : {data['Start']}, \t {data['Benefits']}")
+
+
+if file:
+    openFile = OpenExcel()
+    openFile.Out()
+
 
 
 book = openpyxl.Workbook()
