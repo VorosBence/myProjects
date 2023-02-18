@@ -16,6 +16,8 @@ for row in worksheet.iter_rows(min_row=2, values_only=True):
 
     Datas.append(data)
 '''
+
+
 book = openpyxl.Workbook()
 sheet = book.active
 
@@ -61,6 +63,22 @@ generate(50)
 
 
 
+
+
+class CreateExcel():
+    def __init__(self):
+        book = openpyxl.Workbook()
+        sheet = book.active
+        sheet['B1'] = 'Id'
+        sheet['C1'] = 'Name'
+        sheet['D1'] = 'Position'
+        sheet['E1'] = 'Supervisor'
+        sheet['F1'] = 'Start'
+        sheet['G1'] = 'Benefits'
+
+        self.position = {1: 'Owner', 2: 'DepartmentLeader', 3: 'Teamleader', 4: 'Developer'}
+        self.position_list = []
+        self.benefits = {1: 'Car', 2: 'Phone', 3: 'Fuel card', 4: 'Gift card'}
 
 
 
