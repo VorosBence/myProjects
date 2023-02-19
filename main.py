@@ -3,7 +3,6 @@ import random
 import os
 import sys
 
-
 file_name = ''
 file = os.path.isfile(file_name)
 
@@ -29,51 +28,10 @@ class OpenExcel():
 
 
 
-
-
-
-
-'''for id in range(0,50):
-
-    id_sheet = 'B'+str(id+2)
-    sheet[id_sheet] = id+2
-
-book.save('test.xlsx')'''
-
-position = {1:'Owner',2:'DepartmentLeader',3:'Teamleader',4:'Developer'}
-position_list = []
-benefits = {1:'Car',2:'Phone',3:'Fuel card',4:'Gift card'}
-def generate(max_num):
-    position_line_data = {}
-    position_line_data['Id'] = 2
-    position_line_data['Name'] = 'Voros Bence'
-    position_line_data['Position'] = position[1]
-    position_line_data['Supervisor'] = None
-    position_line_data['Start'] = '2010.10.11'
-    position_line_data['Benefits'] = benefits[random.randint(1,4)]
-    position_list.append(position_line_data)
-
-    DL = round((max_num/100)*20)
-    TL = round((max_num/100)*30)
-    Dev = max_num-(DL+TL)
-
-    for id in range(1,max_num):
-        position_line_data = {}
-        position_line_data['Id'] = id+2
-
-    print(position_list)
-
-generate(50)
-
-
-
-
-
-
 class CreateExcel():
     def __init__(self):
-        book = openpyxl.Workbook()
-        sheet = book.active
+        self.book = openpyxl.Workbook()
+        sheet = self.book.active
         sheet['B1'] = 'Id'
         sheet['C1'] = 'Name'
         sheet['D1'] = 'Position'
@@ -87,13 +45,16 @@ class CreateExcel():
         self.position_line_data = {}
         self.position_line_data['Id'] = 2
         self.position_line_data['Name'] = 'Voros Bence'
-        self.position_line_data['Position'] = position[1]
+        self.position_line_data['Position'] = self.position[1]
         self.position_line_data['Supervisor'] = None
         self.position_line_data['Start'] = '2010.10.11'
-        self.position_line_data['Benefits'] = benefits[random.randint(1, 4)]
+        self.position_line_data['Benefits'] = self.benefits[random.randint(1, 4)]
         self.position_list.append(self.position_line_data)
     def generate(self,max_num):
         self.owner()
+
+    def create(self,name):
+        self.book.save(name)
 
 if file:
     openFile = OpenExcel()
@@ -101,3 +62,4 @@ if file:
 else:
     createFile = CreateExcel()
     createFile.generate(50)
+    #createFile.create('ilovepython.xlsx')
