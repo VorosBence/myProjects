@@ -1,10 +1,11 @@
 import openpyxl
 import random
 import os
+import sys
 
-file_name = 'valami.xlsx'
+
+file_name = ''
 file = os.path.isfile(file_name)
-
 
 class OpenExcel():
     def __init__(self):
@@ -27,28 +28,17 @@ class OpenExcel():
             print(f"Id : {data['Id']}, \t Name : {data['Name']}, \t Position : {data['Position']}, \t Supervisor : {data['Supervisor']}, \t Start : {data['Start']}, \t {data['Benefits']}")
 
 
-if file:
-    openFile = OpenExcel()
-    openFile.Out()
 
 
 
-book = openpyxl.Workbook()
-sheet = book.active
 
-sheet['B1'] = 'Id'
-sheet['C1'] = 'Name'
-sheet['D1'] = 'Position'
-sheet['E1'] = 'Supervisor'
-sheet['F1'] = 'Start'
-sheet['G1'] = 'Benefits'
 
-for id in range(0,50):
+'''for id in range(0,50):
 
     id_sheet = 'B'+str(id+2)
     sheet[id_sheet] = id+2
 
-book.save('test.xlsx')
+book.save('test.xlsx')'''
 
 position = {1:'Owner',2:'DepartmentLeader',3:'Teamleader',4:'Developer'}
 position_list = []
@@ -90,11 +80,24 @@ class CreateExcel():
         sheet['E1'] = 'Supervisor'
         sheet['F1'] = 'Start'
         sheet['G1'] = 'Benefits'
-
         self.position = {1: 'Owner', 2: 'DepartmentLeader', 3: 'Teamleader', 4: 'Developer'}
         self.position_list = []
         self.benefits = {1: 'Car', 2: 'Phone', 3: 'Fuel card', 4: 'Gift card'}
+    def owner(self):
+        self.position_line_data = {}
+        self.position_line_data['Id'] = 2
+        self.position_line_data['Name'] = 'Voros Bence'
+        self.position_line_data['Position'] = position[1]
+        self.position_line_data['Supervisor'] = None
+        self.position_line_data['Start'] = '2010.10.11'
+        self.position_line_data['Benefits'] = benefits[random.randint(1, 4)]
+        self.position_list.append(self.position_line_data)
+    def generate(self,max_num):
+        self.owner()
 
-
-
-
+if file:
+    openFile = OpenExcel()
+    openFile.Out()
+else:
+    createFile = CreateExcel()
+    createFile.generate(50)
