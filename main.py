@@ -54,12 +54,11 @@ class CreateExcel():
         employees['DepartmentLeader'] = round((max_num/100) * 20)
         employees['TeamLeader'] = round((max_num / 100) * 30)
         employees['Developer'] = max_num-(employees['Leader']+employees['DepartmentLeader']+employees['TeamLeader'])
-
         self.owner()
         self.departmentleader(employees['DepartmentLeader'])
         self.teamLeader(self.dp_number_id,employees['TeamLeader'])
         self.developer(self.tl_number_id,employees['Developer'])
-        self.printDatas()
+        self.addToExcel()
     def departmentleader(self,num):
         self.dp_number_id = 3+num
         for id in range(3,self.dp_number_id+1):
@@ -84,7 +83,7 @@ class CreateExcel():
             self.position_list.append(self.position_line_data)
     def developer(self,next_num,num_id):
         self.dev_number_id = next_num + num_id
-        for id in range(next_num+1,self.dev_number_id+1):
+        for id in range(next_num+1,self.dev_number_id):
             self.position_line_data = {}
             self.position_line_data['Id'] = id
             self.position_line_data['Name'] = self.nameGenerator()
@@ -104,7 +103,7 @@ class CreateExcel():
             if day < 10:
                 day = '0'+str(day)
                 int(day)
-        elif month == 2 and year // 4:
+        elif month == 2 and year % 4 == 0:
             day = random.randint(1,29)
             if day < 10:
                 day = '0'+str(day)
@@ -124,16 +123,49 @@ class CreateExcel():
     def nameGenerator(self):
         names = {1: 'Oliver', 2: 'Jack', 3: 'Harry', 4: 'Jacob', 5: 'Charlie', 6: 'Thomas', 7: 'George', 8: 'Oscar',9:'Margaret', 10:'Elizabeth'}
         return names[random.randint(1,10)]
-    def printDatas(self):
-        for i in self.position_list:
-            print(i)
+
+    def addToExcel(self):
+        sheet = self.book.active
+        sheet['B2'] = f'000{self.position_list[0]["Id"]-1}'
+        sheet['C2'] = self.position_list[0]['Name']
+        sheet['D2'] = self.position_list[0]['Position']
+        sheet['E2'] = self.position_list[0]['Supervisor']
+        sheet['F2'] = self.position_list[0]['Start']
+        sheet['G2'] = self.position_list[0]['Benefits']
+        for data in self.position_list:
+            if len(str(int(data['Id'])-1)) == 1:
+                pos_id = f'000{data["Id"]-1}'
+            elif len(str(int(data['Id'])-1)) == 2:
+                pos_id = f'00{data["Id"]-1}'
+            elif len(str(int(data['Id'])-1)) == 3:
+                pos_id = f'0{data["Id"]-1}'
+            elif len(str(int(data['Id'])-1)) == 4:
+                pos_id = f'{data["Id"]-1}'
+
+            if data['Supervisor'] == None:
+                continue
+            elif len(str(int(data['Supervisor'])-1)) == 1:
+                Supervisor_id = f'000{data["Supervisor"]-1}'
+            elif len(str(int(data['Supervisor'])-1)) == 2:
+                Supervisor_id = f'00{data["Supervisor"] - 1}'
+            elif len(str(int(data['Supervisor'])-1)) == 3:
+                Supervisor_id = f'0{data["Supervisor"] - 1}'
+            elif len(str(int(data['Supervisor'])-1)) == 4:
+                Supervisor_id = f'{data["Supervisor"] - 1}'
+
+
+            sheet['B'+str(data["Id"])] = pos_id
+            sheet['C'+str(data["Id"])] = data['Name']
+            sheet['D'+str(data["Id"])] = data['Position']
+            sheet['E'+str(data["Id"])] = Supervisor_id
+            sheet['F'+str(data["Id"])] = data['Start']
+            sheet['G'+str(data["Id"])] = data['Benefits']
     def create(self,name):
         self.book.save(name)
-
 if file:
     openFile = OpenExcel()
     openFile.Out()
 else:
     createFile = CreateExcel()
     createFile.generate(50)
-    #createFile.create('ilovepython.xlsx')
+    createFile.create('ilovepython.xlsx')
