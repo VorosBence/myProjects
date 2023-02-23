@@ -58,6 +58,7 @@ class CreateExcel():
         self.owner()
         self.departmentleader(employees['DepartmentLeader'])
         self.teamLeader(self.dp_number_id,employees['TeamLeader'])
+        self.developer(self.tl_number_id,employees['Developer'])
         self.printDatas()
     def departmentleader(self,num):
         self.dp_number_id = 3+num
@@ -70,7 +71,6 @@ class CreateExcel():
             self.position_line_data['Start'] = self.dateGenerator()
             self.position_line_data['Benefits'] = self.benefits[random.randint(1, 4)]
             self.position_list.append(self.position_line_data)
-
     def teamLeader(self,next_num,num_id):
         self.tl_number_id = next_num + num_id
         for id in range(next_num+1,self.tl_number_id+1):
@@ -78,11 +78,21 @@ class CreateExcel():
             self.position_line_data['Id'] = id
             self.position_line_data['Name'] = self.nameGenerator()
             self.position_line_data['Position'] = self.position[3]
-            self.position_line_data['Supervisor'] = self.position_list[0]['Id']
+            self.position_line_data['Supervisor'] = self.position_list[random.randint(1,self.dp_number_id-2)]['Id']
             self.position_line_data['Start'] = self.dateGenerator()
             self.position_line_data['Benefits'] = self.benefits[random.randint(1, 4)]
             self.position_list.append(self.position_line_data)
-
+    def developer(self,next_num,num_id):
+        self.dev_number_id = next_num + num_id
+        for id in range(next_num+1,self.dev_number_id+1):
+            self.position_line_data = {}
+            self.position_line_data['Id'] = id
+            self.position_line_data['Name'] = self.nameGenerator()
+            self.position_line_data['Position'] = self.position[4]
+            self.position_line_data['Supervisor'] = self.position_list[random.randint(self.dp_number_id-1,self.tl_number_id-2)]['Id']
+            self.position_line_data['Start'] = self.dateGenerator()
+            self.position_line_data['Benefits'] = self.benefits[random.randint(1, 4)]
+            self.position_list.append(self.position_line_data)
     def dateGenerator(self):
         year = random.randint(1980,2023)
         month = random.randint(1,12)
