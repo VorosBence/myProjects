@@ -57,7 +57,8 @@ class CreateExcel():
 
         self.owner()
         self.departmentleader(employees['DepartmentLeader'])
-
+        self.teamLeader(self.dp_number_id,employees['TeamLeader'])
+        self.printDatas()
     def departmentleader(self,num):
         self.dp_number_id = 3+num
         for id in range(3,self.dp_number_id+1):
@@ -70,7 +71,18 @@ class CreateExcel():
             self.position_line_data['Benefits'] = self.benefits[random.randint(1, 4)]
             self.position_list.append(self.position_line_data)
 
-        print(self.position_list)
+    def teamLeader(self,next_num,num_id):
+        self.tl_number_id = next_num + num_id
+        for id in range(next_num+1,self.tl_number_id+1):
+            self.position_line_data = {}
+            self.position_line_data['Id'] = id
+            self.position_line_data['Name'] = self.nameGenerator()
+            self.position_line_data['Position'] = self.position[3]
+            self.position_line_data['Supervisor'] = self.position_list[0]['Id']
+            self.position_line_data['Start'] = self.dateGenerator()
+            self.position_line_data['Benefits'] = self.benefits[random.randint(1, 4)]
+            self.position_list.append(self.position_line_data)
+
     def dateGenerator(self):
         year = random.randint(1980,2023)
         month = random.randint(1,12)
@@ -99,12 +111,12 @@ class CreateExcel():
                 int(day)
         date = f'{year}.{month}.{day}'
         return date
-
-
     def nameGenerator(self):
         names = {1: 'Oliver', 2: 'Jack', 3: 'Harry', 4: 'Jacob', 5: 'Charlie', 6: 'Thomas', 7: 'George', 8: 'Oscar',9:'Margaret', 10:'Elizabeth'}
         return names[random.randint(1,10)]
-
+    def printDatas(self):
+        for i in self.position_list:
+            print(i)
     def create(self,name):
         self.book.save(name)
 
