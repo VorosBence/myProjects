@@ -26,8 +26,6 @@ class OpenExcel():
         for data in self.Datas:
             print(f"Id : {data['Id']}, \t Name : {data['Name']}, \t Position : {data['Position']}, \t Supervisor : {data['Supervisor']}, \t Start : {data['Start']}, \t {data['Benefits']}")
 
-
-
 class CreateExcel():
     def __init__(self):
         self.book = openpyxl.Workbook()
@@ -51,7 +49,61 @@ class CreateExcel():
         self.position_line_data['Benefits'] = self.benefits[random.randint(1, 4)]
         self.position_list.append(self.position_line_data)
     def generate(self,max_num):
+        employees = {}
+        employees['Leader'] = 1
+        employees['DepartmentLeader'] = round((max_num/100) * 20)
+        employees['TeamLeader'] = round((max_num / 100) * 30)
+        employees['Developer'] = max_num-(employees['Leader']+employees['DepartmentLeader']+employees['TeamLeader'])
+
         self.owner()
+        self.departmentleader(employees['DepartmentLeader'])
+
+    def departmentleader(self,num):
+        self.dp_number_id = 3+num
+        for id in range(3,self.dp_number_id+1):
+            self.position_line_data = {}
+            self.position_line_data['Id'] = id
+            self.position_line_data['Name'] = self.nameGenerator()
+            self.position_line_data['Position'] = self.position[2]
+            self.position_line_data['Supervisor'] = self.position_list[0]['Id']
+            self.position_line_data['Start'] = self.dateGenerator()
+            self.position_line_data['Benefits'] = self.benefits[random.randint(1, 4)]
+            self.position_list.append(self.position_line_data)
+
+        print(self.position_list)
+    def dateGenerator(self):
+        year = random.randint(1980,2023)
+        month = random.randint(1,12)
+        if month < 10:
+            month = '0'+str(month)
+            int(month)
+        if month == 2:
+            day = random.randint(1,28)
+            if day < 10:
+                day = '0'+str(day)
+                int(day)
+        elif month == 2 and year // 4:
+            day = random.randint(1,29)
+            if day < 10:
+                day = '0'+str(day)
+                int(day)
+        elif month == 1 or month == 3 or month == 5 or month == 7 or month == 8 or month == 10 or month == 12:
+            day = random.randint(1,31)
+            if day < 10:
+                day = '0'+str(day)
+                int(day)
+        else:
+            day = random.randint(1,30)
+            if day < 10:
+                day = '0'+str(day)
+                int(day)
+        date = f'{year}.{month}.{day}'
+        return date
+
+
+    def nameGenerator(self):
+        names = {1: 'Oliver', 2: 'Jack', 3: 'Harry', 4: 'Jacob', 5: 'Charlie', 6: 'Thomas', 7: 'George', 8: 'Oscar',9:'Margaret', 10:'Elizabeth'}
+        return names[random.randint(1,10)]
 
     def create(self,name):
         self.book.save(name)
