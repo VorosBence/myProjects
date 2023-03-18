@@ -84,7 +84,7 @@ class Matrix:
                 file.write(f'{str(index)} ')
 
             file.write(f'\nSum : {str(len(self.sum_odd))}')
-m1= Matrix(4)
+m1= Matrix(10)
 m1.createMatrix()
 m1.printMatrix()
 m1.allRows()
