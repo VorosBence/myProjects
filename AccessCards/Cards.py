@@ -8,22 +8,15 @@ class cardsData:
         with open('cardsData.txt','r') as file:
             for line in file:
                 data_line = line.strip().split()
-                #print(len(data_line))
-
                 if len(data_line) > 0:
-                    for i in data_line:
-                        print(i)
-                        print(i.find(':'))
-                        colon = i.find(':')
-                        print(i[:colon])
-                        print(i[colon+1:])
-
-                elif len(data_line) == 0:
-                    print('----')
-                '''if len(data_line) == 0:
-                    print('----')
+                    for data in data_line:
+                        colon = data.find(':')
+                        self.datas[data[:colon]] = data[colon+1:]
+                        self.database.append(self.datas)
                 else:
-                    print(data_line)
-'''
+                    self.datas = {}
+
+
 c1 = cardsData()
 c1.readFile()
+print(c1.database)
