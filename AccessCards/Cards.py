@@ -1,22 +1,42 @@
-
 class cardsData:
     def __init__(self):
         self.database = []
+        self.temp_database = []
         self.datas = {}
 
     def readFile(self):
+        temp_data = []
         with open('cardsData.txt','r') as file:
             for line in file:
                 data_line = line.strip().split()
                 if len(data_line) > 0:
                     for data in data_line:
-                        colon = data.find(':')
-                        self.datas[data[:colon]] = data[colon+1:]
-                        self.database.append(self.datas)
+                        temp_data.append(data)
                 else:
-                    self.datas = {}
+                    self.temp_database.append(temp_data)
+                    temp_data = []
+
+
+
+
+                '''for data in data_line:
+
+                    colon = data.find(':')
+                    self.datas[data[:colon]] = data[colon+1:]
+                    self.database.append(self.datas)
+                    if len(data_line) > 0:
+                        print(data_line)
+                    else:
+                        print('----')'''
+
+    def print_temp_data(self):
+        for i in self.temp_database:
+            print(i)
+
+
+
 
 
 c1 = cardsData()
 c1.readFile()
-print(c1.database)
+c1.print_temp_data()
