@@ -18,8 +18,18 @@ class cardsData:
 
 
 
+        for lines in self.temp_database:
+            for data in lines:
+                colon = data.find(':')
+                self.datas[data[:colon]] = data[colon+1:]
 
-                '''for data in data_line:
+            self.database.append(self.datas)
+            self.datas = {}
+
+
+
+
+            '''for data in data_line:
 
                     colon = data.find(':')
                     self.datas[data[:colon]] = data[colon+1:]
@@ -29,14 +39,19 @@ class cardsData:
                     else:
                         print('----')'''
 
+
     def print_temp_data(self):
-        for i in self.temp_database:
-            print(i)
+        for data in self.temp_database:
+            print(data)
 
 
+    def printDB(self):
+        for data in self.database:
+            print(data)
 
 
 
 c1 = cardsData()
 c1.readFile()
-c1.print_temp_data()
+#c1.print_temp_data()
+c1.printDB()
