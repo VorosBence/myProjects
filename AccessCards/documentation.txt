@@ -1,0 +1,23 @@
+Cards.py
+
+call cardsData
+
+methods
+    readFile()
+        open cardsData.txt file
+        read data
+        if line empty temp_data self.temp_database and clear temp_data
+        After search colon in line
+        and this method add data in Dictionary
+            datas[data[:colon]] = data[colon+1:]
+
+    print_temp_data()
+        print self.temp_database
+
+    printDB()
+        print self.database
+
+setup.py
+    c1 = cardsData() call Class
+    c1.readFile()    call readFile method
+    db = c1.database    return database data
