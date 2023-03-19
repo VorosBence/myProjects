@@ -1,32 +1,51 @@
 class loginReturn():
     def __init__(self,db):
         self.db = db
-
+        self.log = []
     def argsCheck(self):
-        pid = False
-        byr = False
-        cid = False
-        iyr = False
-        eyr = False
-        hgt = False
-        hcl = False
-        ecl = False
-        for line in self.db:
+        for key,line in enumerate(self.db):
+            pid = False
+            byr = False
+            cid = False
+            iyr = False
+            eyr = False
+            hgt = False
+            hcl = False
+            ecl = False
             for data in line:
+
+                checkBook = {}
                 if data == 'pid':
                     pid = True
-                elif data == 'byr':
+
+                if data == 'byr':
                     byr = True
-                elif data == 'cid':
+
+                if data == 'cid':
                     cid = True
-                elif data == 'iyr':
+
+                if data == 'iyr':
                     iyr = True
-                elif data == 'eyr':
+
+                if data == 'eyr':
                     eyr = True
-                elif data == 'hgt':
+
+                if data == 'hgt':
                     hgt = True
-                elif data == 'hcl':
+
+                if data == 'hcl':
                     hcl = True
-                elif data == 'ecl':
+
+                if data == 'ecl':
                     ecl = True
+            checkBook['ID'] = key
+            checkBook['pid'] = pid
+            checkBook['byr'] = byr
+            checkBook['cid'] = cid
+            checkBook['iyr'] = iyr
+            checkBook['eyr'] = eyr
+            checkBook['hgt'] = hgt
+            checkBook['hcl'] = hcl
+            checkBook['ecl'] = ecl
+            self.log.append(checkBook)
 
