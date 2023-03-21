@@ -54,9 +54,9 @@ class loginReturn():
             self.errors.append(error)
 
     def loginCardsOK(self):
-        self.allowed = 0
-        self.Denied = []
-        self.denied = 0
+        self.allowed = 0 #len
+        self.Denied = [] #indexek
+        self.denied = 0 #len
         for i in self.errors:
             logOk = {}
             for index in i:
@@ -65,7 +65,9 @@ class loginReturn():
                     continue
                 elif i[index] != 'cid':
                     logOk['OK'] = 'no'
-                    self.Denied.append(i['Index'])
+                    if i['Index'] not in self.Denied:
+                        self.Denied.append(i['Index'])
+
                 else:
                     logOk['OK'] = 'yes'
             self.okLogCard.append(logOk)
