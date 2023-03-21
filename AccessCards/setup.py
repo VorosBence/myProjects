@@ -1,19 +1,25 @@
 from Cards import *
 from loginReturn import *
+from AllowedCards import *
 
 def allowedCards():
-
-    print(f'A rendszerben {l1.allowed} belépő kértya van rendben')
-    print(f'{l1.denied} db azoknak a kártyáknak a száma amik nincsenek rendben')
+    print(f'A rendszerben {AppReturn.allowed} belépő kértya van rendben')
+    print(f'{AppReturn.denied} db azoknak a kártyáknak a száma amik nincsenek rendben')
 
 if __name__ == '__main__':
-    c1 = cardsData()
-    c1.readFile()
-    db = c1.database
+    App = cardsData()
+    App.readFile()
+    db = App.database
 
-    l1 = loginReturn(db)
-    l1.argsCheck()
-    l1.searchError()
-    l1.loginCardsOK()
+    AppReturn = loginReturn(db)
+    AppReturn.argsCheck()
+    AppReturn.searchError()
+    AppReturn.loginCardsOK()
+
+    allowedDB = AppReturn.Allowed
 
     allowedCards()
+
+    AppCheckAll = AllowedCardsCheck(db,allowedDB)
+    AppCheckAll.CardsOutPut()
+

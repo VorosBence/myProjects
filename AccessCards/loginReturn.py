@@ -56,6 +56,7 @@ class loginReturn():
     def loginCardsOK(self):
         self.allowed = 0 #len
         self.Denied = [] #indexek
+        self.Allowed = []
         self.denied = 0 #len
         for i in self.errors:
             logOk = {}
@@ -67,11 +68,11 @@ class loginReturn():
                     logOk['OK'] = 'no'
                     if i['Index'] not in self.Denied:
                         self.Denied.append(i['Index'])
-
                 else:
                     logOk['OK'] = 'yes'
             self.okLogCard.append(logOk)
         self.allowed = len(self.db) - len(self.Denied)
         self.denied = len(self.Denied)
+        self.Allowed = [data for data in range(len(self.db)) if data not in self.Denied]
 
 
