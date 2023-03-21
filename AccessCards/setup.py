@@ -23,3 +23,5 @@ if __name__ == '__main__':
     AppCheckAll = AllowedCardsCheck(db,allowedDB)
     AppCheckAll.CardsOutPut()
 
+    for i in AppCheckAll.SuccesLoginCards:
+        print(i)
