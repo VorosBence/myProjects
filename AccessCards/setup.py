@@ -1,13 +1,19 @@
 from Cards import *
 from loginReturn import *
 
-c1 = cardsData()
-c1.readFile()
-db = c1.database
+def allowedCards():
 
-l1 = loginReturn(db)
-l1.argsCheck()
-l1.searchError()
+    print(f'A rendszerben {l1.allowed} belépő kértya van rendben')
+    print(f'{l1.denied} db azoknak a kártyáknak a száma amik nincsenek rendben')
 
-l1.loginCardsOK()
+if __name__ == '__main__':
+    c1 = cardsData()
+    c1.readFile()
+    db = c1.database
 
+    l1 = loginReturn(db)
+    l1.argsCheck()
+    l1.searchError()
+    l1.loginCardsOK()
+
+    allowedCards()
