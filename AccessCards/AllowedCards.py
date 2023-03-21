@@ -42,6 +42,10 @@ class AllowedCardsCheck():
                             succesCard[i] = 'accepted'
                         else:
                             succesCard[i] = 'denied'
+                    if i == 'hcl':
+                        color = value[i][:1]
+                        if color == '#':
+                            print(value[i])
 
 
 
