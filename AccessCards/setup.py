@@ -7,5 +7,7 @@ db = c1.database
 
 l1 = loginReturn(db)
 l1.argsCheck()
+l1.searchError()
 
-print(l1.log)
+l1.loginCardsOK()
+
