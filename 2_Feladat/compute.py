@@ -33,13 +33,17 @@ class Compute:
                     self.value += number
                 else:
                     self.value -= number
-            elif self.database[self.index][0] == 'jmp':
+                    #2. része a Feladatnak ha nop ot talál akk a jmp funkcióját hajtja végre
+            elif self.database[self.index][0] == 'jmp' or self.database[self.index][0] == 'nop':
                 if sign:
                     self.index += number
                 else:
                     self.index -= number
+            '''
+            1.részben használt kód
             elif self.database[self.index][0] == 'nop':
                 self.index += 1
+                '''
             if self.index not in self.usedIndex:
                 self.usedIndex.append(self.index)
             else:
