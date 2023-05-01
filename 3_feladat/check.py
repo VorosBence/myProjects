@@ -2,7 +2,6 @@ answers = []
 group = []
 allowed = []
 characters = 'abcdefghijklmnopqrstuvwxyz'
-ascii = [ord(char) for char in characters]
 with open('feladat3.txt','r') as file:
     for line in file:
         data = line.strip().split()
@@ -13,24 +12,15 @@ with open('feladat3.txt','r') as file:
         else:
             group.append(data)
 
-
-
-def convert_character(__string__= 'bence'):
-    return [ord(char) for char in __string__]
-
-
-def check_character(__list__ = convert_character()):
-    print(len(ascii))
-
-check_character()
-
 character2 = []
 for index, ans in enumerate(answers):
     for indexy,data in enumerate(ans):
         character2 = []
-        
-       
+        character2.append(d for d in data if not character2)
+        print(index,character2)
     
+
+
 
 
 
