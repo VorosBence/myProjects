@@ -13,26 +13,12 @@ with open('feladat3.txt','r') as file:
         else:
             group.append(data)
 
-
-
 def convert_character(__string__):
     return list(set([ord(char) for char in __string__]))
 def check_character(__list__):
     return len(characters) == len(__list__)
 
     
-    
-
-
-
-
-if check_character(convert_character(characters)):
-    allowed.append(1)
-else:
-    allowed.append(2)
-
-
-
 for index, ans in enumerate(answers):
     temp = ''
     for indexy,data in enumerate(ans):
