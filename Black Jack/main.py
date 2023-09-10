@@ -31,14 +31,13 @@ class Deck:
             self.shuffle()
         return self.cards.pop()
 
-# Initialize game variables
+
 deck = Deck()
 player_hand = []
 dealer_hand = []
 player_money = 100
 player_bet = 1
 
-# Game functions
 def new_game():
     global player_hand, dealer_hand, player_bet
     if player_money <= 0:
@@ -63,7 +62,6 @@ def evaluate():
     if player_money <= 0:
         messagebox.showinfo("Game Over", "You have no money left!")
         return
-    # Calculate hand values
     player_value = calculate_value(player_hand)
     dealer_value = calculate_value(dealer_hand)
     if player_value > 21:
@@ -92,7 +90,7 @@ def calculate_value(hand):
         aces -= 1
     return value
 
-# Create Tkinter window
+
 root = tk.Tk()
 root.title("Blackjack Game")
 root.geometry("800x200")
@@ -101,7 +99,7 @@ root.geometry("800x200")
 main_frame = ttk.Frame(root, padding="10")
 main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
-# Create labels and buttons
+
 instruction_label = ttk.Label(main_frame, text="Welcome to Blackjack! Press 'New Game' to start.", wraplength=300)
 player_label = ttk.Label(main_frame, text="Player:")
 dealer_label = ttk.Label(main_frame, text="Dealer:")
@@ -111,7 +109,7 @@ new_game_button = ttk.Button(main_frame, text="New Game", command=new_game)
 draw_card_button = ttk.Button(main_frame, text="Draw Card", command=draw_card)
 evaluate_button = ttk.Button(main_frame, text="Evaluate", command=evaluate)
 
-# Place widgets on the grid
+
 instruction_label.grid(row=0, column=0, columnspan=2)
 player_label.grid(row=1, column=0, sticky=tk.W)
 dealer_label.grid(row=1, column=1, sticky=tk.W)
