@@ -1,0 +1,21 @@
+Osztályok:
+Card: Egy kártyalap osztály, amely tartalmazza a kártya színét (suit) és értékét (value).
+Deck: Egy pakli osztály, amely egy kártyalapok listáját (cards) tartalmazza. A pakli keverhető, és a játékosok kártyalapokat húzhatnak belőle.
+Függvények:
+new_game: Új játékot indít. Kioszt két kártyalapot a játékosnak és a dealernek (banknak), és frissíti a GUI-t.
+draw_card: Húz egy kártyalapot a játékosnak, és frissíti a GUI-t.
+evaluate: Kiértékeli a játékot, megnézi, hogy ki nyert, és frissíti a játékos pénzének állapotát és a GUI-t.
+calculate_value: Kiszámolja egy adott kéz kártyalapjainak értékét.
+Tkinter Elemek:
+root: Az alap Tkinter ablak.
+main_frame: A fő keret, amely tartalmazza az összes widgetet.
+instruction_label: Az utasításokat tartalmazó címke.
+player_label és dealer_label: A játékos és a dealer kártyalapjait mutató címkék.
+money_label és bet_label: A játékos pénzét és tétjét mutató címkék.
+new_game_button, draw_card_button, evaluate_button: A játék akcióit végrehajtó gombok.
+Globális Változók:
+deck: Az aktuális kártyalap pakli.
+player_hand és dealer_hand: A játékos és a dealer kártyalapjainak listái.
+player_money: A játékos aktuális pénzösszege.
+player_bet: Az aktuális tét.
+A függvények és gombok kapcsolódnak egymáshoz, hogy a játék logikája működjön. Például, az "New Game" gomb az new_game() függvényt hívja meg, amely új kártyalapokat oszt ki és frissíti a GUI-t.
